@@ -5,13 +5,11 @@ const Tour = require('./../../models/tourModel');
 
 dotenv.config({ path: './config.env' });
 
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
+const DB = 'mongodb://localhost:27017/natours';
 
 mongoose
   .connect(DB, {
+    useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
