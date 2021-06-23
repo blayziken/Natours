@@ -34,3 +34,13 @@
 // } else if (score > minimumScoreToPass) {
 //     print('Student Passed');
 // }
+
+let correct;
+
+const a = 1;
+
+if (a == 1) {
+    correct = false
+}
+
+console.log(!correct);

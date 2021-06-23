@@ -72,6 +72,7 @@ userSchema.pre('save', async function (next) {
 //     next();
 // });
 
+//TO CHECK IF SIGN-IN PASSWORD IS CORRECT:
 userSchema.methods.correctPassword = async function (inputPasswood, userPassword) {
     //inputPasswood is not hashed,
     //userPassword is hashed
