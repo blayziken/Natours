@@ -1,7 +1,7 @@
 // const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -54,7 +54,7 @@ userSchema.pre('save', async function (next) {
     // Hash the password with cost of 12
     this.password = await bcrypt.hash(this.password, 12);
 
-    // Delete passwordConfirm field
+    // Delete passwordConfirm field, we don't need it in the DB
     this.passwordConfirm = undefined;
     next();
 });
