@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const catchAsyncError = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 
 exports.signup = catchAsyncError(async (req, res, next) => {
     // const newUser = await User.create(req.body);  Security flaw, anybody can sign up with admin rights\
@@ -26,3 +27,19 @@ exports.signup = catchAsyncError(async (req, res, next) => {
         }
     });
 });
+
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body;
+
+    // 1) Check if email and password exist
+    if (!email || !password) {
+        return next(new AppError('Please provide email and password!', 400));
+    }
+    // 2) Check if user exists && password is correct
+    const user = await User.findOne({ email }).select('+password');
+
+    if (!user || !(await user.correctPassword(password, user.password))) {
+        return next(new AppError('Incorrect email or password', 401));
+    }
+
+};
