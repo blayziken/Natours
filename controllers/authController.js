@@ -12,7 +12,8 @@ exports.signup = catchAsyncError(async (req, res, next) => {
         passwordConfirm: req.body.passwordConfirm
     });
 
-    const token = jwt.sign({ id: newUser._id },);
+    //JWT.SIGN({PAYLOAD}, SECRET_KEY, )
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
 
 
     res.status('201').json({
