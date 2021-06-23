@@ -38,6 +38,13 @@ exports.login = async (req, res, next) => {
     // 2) Check if user exists && password is correct
     const user = await User.findOne({ email: email }).select('+password');
     //We can write this line with ES6 as User.findOne({email})
+    //Since the password is hidden with select:false, to get the password from the findOne, we use the select() to select a field from the DB
+    console.log(user);
+    res.status(200).json({
+        status: 'success',
+        data: { user }
+
+    });
 
     if (!user || !(await user.correctPassword(password, user.password))) {
         return next(new AppError('Incorrect email or password', 401));
