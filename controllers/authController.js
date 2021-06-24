@@ -107,6 +107,14 @@ exports.protect = async (req, res, next) => {
 
 
 
+// .........................................................................
+// We can't pass arguments into middleware functions 
+// but we need to pass the roles who are allowed to access the resource
+// i.e admin and lead guide
+// 
+// SOLN: Create a wrapper function which will then return the middleware
+// function that we actual want to create
+
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
         // roles ['admin', 'lead-guide']. role='user'
