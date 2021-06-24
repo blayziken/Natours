@@ -48,6 +48,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+// ENCRYPTING USER PASSWORD ON SIGN UP:
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next(); //If the password has not been modified, exit from this function
 
@@ -72,13 +73,14 @@ userSchema.pre('save', async function (next) {
 //     next();
 // });
 
-//TO CHECK IF SIGN-IN PASSWORD IS CORRECT:
+//TO CHECK IF PASSWORD DURING SIGN-IN  IS CORRECT:
 userSchema.methods.correctPassword = async function (inputPasswood, userPassword) {
     //inputPasswood is not hashed,
     //userPassword is hashed
     return await bcrypt.compare(inputPasswood, userPassword);
 };
 
+// TO CHECK IF USER CHANGED PASSWORD AFTER TOKEN WAS ISSUED
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     if (this.passwordChangedAt) {
         const changedTimestamp = parseInt(

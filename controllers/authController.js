@@ -90,6 +90,7 @@ exports.protect = async (req, res, next) => {
             )
         );
     }
+
     //4) CHECK IF USER CHANGED PASSWORD AFTER TOKEN WAS ISSUED
     //To check if user recently changed password, we will create an instance method available on all documents
 
