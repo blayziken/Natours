@@ -104,3 +104,7 @@ exports.protect = async (req, res, next) => {
     req.user = currentUser;
     next();
 }
+
+exports.restrictTo = async (req, res, next) => {
+
+}
