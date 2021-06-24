@@ -95,20 +95,21 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     return false;
 };
 
-// userSchema.methods.createPasswordResetToken = function () {
-//     const resetToken = crypto.randomBytes(32).toString('hex');
+// CREATING AN INSTANCE METHOD FOR THE PASSWORD RESET TOKEN
+userSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex');
 
-//     this.passwordResetToken = crypto
-//         .createHash('sha256')
-//         .update(resetToken)
-//         .digest('hex');
+    this.passwordResetToken = crypto
+        .createHash('sha256')
+        .update(resetToken)
+        .digest('hex');
 
-//     console.log({ resetToken }, this.passwordResetToken);
+    console.log({ resetToken }, this.passwordResetToken);
 
-//     this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
-//     return resetToken;
-// };
+    return resetToken;
+};
 
 const User = mongoose.model('User', userSchema);
 
