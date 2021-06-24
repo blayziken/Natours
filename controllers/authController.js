@@ -1,3 +1,4 @@
+const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const catchAsyncError = require('./../utils/catchAsync');
@@ -21,7 +22,6 @@ exports.signup = catchAsyncError(async (req, res, next) => {
     });
 
     const token = signToken(newUser._id);
-
 
     res.status('201').json({
         status: 'Created',
@@ -60,3 +60,39 @@ exports.login = async (req, res, next) => {
     });
 
 };
+
+exports.protect = async (req, res, next) => {
+    //1) GET TOKEN AND CHECK IF IT ACTUALLY EXISTS
+    let token;
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (!token) {
+        return next(
+            new AppError('You are not logged in! Please log in to get access.', 401)
+        );
+    }
+
+    //2) CHECK IF TOKEN IS VALID OR NOT
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+    //3) IF VERIFICATION IS SUCCESSFUL, CHECK IF USER STILL EXISTS
+    const freshUser = await User.findById(decoded.id);
+    if (!freshUser) {
+        return next(
+            new AppError(
+                'The user belonging to this token does no longer exist.',
+                401
+            )
+        );
+    }
+    //4) CHECK IF USER CHANGED PASSWORD AFTER TOKEN WAS ISSUED
+    //To check if user recently changed password, we will create an instance method available on all documents
+
+
+    next();
+}
