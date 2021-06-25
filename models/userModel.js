@@ -1,4 +1,4 @@
-// const crypto = require('crypto');
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
@@ -97,8 +97,10 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 
 // CREATING AN INSTANCE METHOD FOR THE PASSWORD RESET TOKEN
 userSchema.methods.createPasswordResetToken = function () {
+    // Creating token:
     const resetToken = crypto.randomBytes(32).toString('hex');
 
+    // Encrypting token:
     this.passwordResetToken = crypto
         .createHash('sha256')
         .update(resetToken)
@@ -106,7 +108,8 @@ userSchema.methods.createPasswordResetToken = function () {
 
     console.log({ resetToken }, this.passwordResetToken);
 
-    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+    // Expires after 10 minutes
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 * 60 (for seconds) * 1000 (for milliseconds)
 
     return resetToken;
 };
