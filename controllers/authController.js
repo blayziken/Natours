@@ -140,6 +140,8 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     }
 
     // 2) GENERATE A RANDOM RESET TOKEN
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave: false }) // Save document so 'this.passwordResetExpires' can be updated
 
     // 3) SEND IT TO USER'S EMAIL
 
