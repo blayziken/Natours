@@ -13,6 +13,18 @@ const signToken = id => {
     });
 }
 
+const createSendToken = (user, statusCode, res) => {
+    const token = signToken(user._id);
+
+    res.status(statusCode).json({
+        status: 'success',
+        token,
+        data: {
+            user: user
+        }
+    });
+}
+
 exports.signup = catchAsyncError(async (req, res, next) => {
     // const newUser = await User.create(req.body);  Security flaw, anybody can sign up with admin rights\
 
@@ -23,15 +35,17 @@ exports.signup = catchAsyncError(async (req, res, next) => {
         passwordConfirm: req.body.passwordConfirm
     });
 
-    const token = signToken(newUser._id);
+    // const token = signToken(newUser._id);
 
-    res.status('201').json({
-        status: 'Created',
-        token,
-        data: {
-            user: newUser
-        }
-    });
+    // res.status('201').json({
+    //     status: 'Created',
+    //     token,
+    //     data: {
+    //         user: newUser
+    //     }
+    // });
+    createSendToken(newUser, 201, res);
+
 });
 
 exports.login = async (req, res, next) => {
@@ -54,12 +68,13 @@ exports.login = async (req, res, next) => {
     }
 
     // 3) If everything is ok, send token to client
-    const token = signToken(user._id);
+    // const token = signToken(user._id);
 
-    res.status(200).json({
-        status: 'success',
-        token
-    });
+    // res.status(200).json({
+    //     status: 'success',
+    //     token
+    // });
+    createSendToken(user, 200, res);
 
 };
 
@@ -107,8 +122,6 @@ exports.protect = async (req, res, next) => {
     next();
 }
 
-
-
 // .........................................................................
 // We can't pass arguments into middleware functions 
 // but we need to pass the roles who are allowed to access the resource
@@ -116,7 +129,6 @@ exports.protect = async (req, res, next) => {
 // 
 // SOLN: Create a wrapper function which will then return the middleware
 // function that we actual want to create
-
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
         // roles ['admin', 'lead-guide']. role='user'
@@ -130,7 +142,6 @@ exports.restrictTo = (...roles) => {
     };
 };
 // .........................................................................
-
 
 exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     // 1) Get User based on the email sent in the POST REQUEST
@@ -167,9 +178,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
         await user.save({ validateBeforeSave: false });
 
         return next(new AppError('There was an error sending the email, try again later'), 500);
-
     }
-
 });
 
 exports.resetPassword = catchAsyncError(async (req, res, next) => {
@@ -196,15 +205,32 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
     await user.save();
 
     // 3) Update changedPasswordAt property for the user
-    // 4) Log the user in, send JWT
-    const token = signToken(user._id);
 
-    res.status(200).json({
-        status: 'success',
-        token
-    });
-    // createSendToken(user, 200, res);
+    // 4) Log the user in, send JWT
+    // const token = signToken(user._id);
+
+    // res.status(200).json({
+    //     status: 'success',
+    //     token
+    // });
+    createSendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsyncError(async (req, res, next) => {
+    // 1) Get user from the collection
+    const user = await User.findById(req.user.id).select('+password');
+
+    // 2) Check if POSTed password is correct
+    if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+        return next(new AppError('Your current password is wrong.', 401));
+    }
+
+    // 3) If so, update password
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+    await user.save();
+    // User.findByIdAndUpdate will NOT work as intended!
+
+    // 4) Log user in, send JWT
+    createSendToken(user, 200, res);
 });
