@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
+const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -77,7 +78,37 @@ const tourSchema = new mongoose.Schema(
     secretTour: {
       type: Boolean,
       default: false
-    }
+    },
+     startLocation: {
+      // GeoJSON
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coordinates: [Number],
+      address: String,
+      description: String
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point']
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number
+      }
+    ],
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
   {
     toJSON: { virtuals: true },
@@ -95,16 +126,6 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
-// tourSchema.pre('save', function(next) {
-//   console.log('Will save document...');
-//   next();
-// });
-
-// tourSchema.post('save', function(doc, next) {
-//   console.log(doc);
-//   next();
-// });
-
 // QUERY MIDDLEWARE
 // tourSchema.pre('find', function(next) {
 tourSchema.pre(/^find/, function (next) {
@@ -116,6 +137,27 @@ tourSchema.pre(/^find/, function (next) {
 
 tourSchema.post(/^find/, function (docs, next) {
   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+
+  next();
+});
+
+// USING POPULATE TO GET ACCESS TO THE REFERENCED TOUR GUIDES WHENEVER WE QUERY FOR A CERTAIN TOUR
+tourSchema.pre(/^find/, function (next) {
+
+  // POPULATE IS NORMALLY CALLED LIKE THIS IN A CONTROLLER:
+  // const tour = await Tour.findById(req.params.id).populate('guides'); //'guides' is the name of the field we want to fill up in our model with the actual data
+  // #* or with additional options:
+  // const tour = await Tour.findById(req.params.id).populate({
+  //   path: 'guides', //name of the field we want to fill up
+  //   select: '-__v -passwordChangedAt' //hide fields we are not interested in
+  // });
+
+  // BUT WE ARE USING THIS QUERY MIDDLEWARE TO MAKE IT EASIER INSTEAD OF REPEATING CODE:
+  this.populate({
+    path: 'guides', 
+    select: '-__v -passwordChangedAt'
+  });
+
   next();
 });
 
@@ -126,6 +168,7 @@ tourSchema.pre('aggregate', function (next) {
   console.log(this.pipeline());
   next();
 });
+
 
 const Tour = mongoose.model('Tour', tourSchema);
 
