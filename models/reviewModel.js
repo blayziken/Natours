@@ -40,5 +40,16 @@ const Review = mongoose.model('Review', reviewSchema);
 module.exports = Review;
 
 
+// QUERY MIDDLEWARE
+reviewSchema.pre(/^find/, function(next) {
+    this.populate({
+        path: 'tour',
+        select: 'name'
+    }).populate({
+        path: 'user',
+        select: 'name photo'
+    })
+    ;
 
-
+    next();
+})
