@@ -25,22 +25,12 @@
 // double classAverage = 70;
 // double minimumScoreToPass = classAverage - 5;
 
-// if (percentage >= 60) {
-//     print('Student Passed');
-// } else if (percentage < 60) {
-//     print('Student Failed');
-// } else if (score <= minimumScoreToPass) {
-//     print('Student Failed');
-// } else if (score > minimumScoreToPass) {
-//     print('Student Passed');
-// }
-
-let correct;
-
-const a = 1;
-
-if (a == 1) {
-    correct = false
+if (percentage >= 60) {
+    print('Student Passed');
+} else if (percentage < 60) {
+    print('Student Failed');
+} else if (score <= minimumScoreToPass) {
+    print('Student Failed');
+} else if (score > minimumScoreToPass) {
+    print('Student Passed');
 }
-
-console.log(!correct);
