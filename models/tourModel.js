@@ -110,6 +110,8 @@ const tourSchema = new mongoose.Schema(
       }
     ]
   },
+  // These options make it so that virtual property also show up in JSON and Object outputs.
+  // What these 2 does is to make sure that when we have a virtual property, basically a field that is not stored in the db but calculated using some other value; we want them to also show up whenever there is an output
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
