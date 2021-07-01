@@ -8,7 +8,7 @@ const router = express.Router();
 // router.param('id', tourController.checkID);
 
 // NESTED ROUTES
-router.use('/:tourId/reviews', reviewRouter);
+router.use('/:tourId/reviews', reviewRouter); // To allow/enable the reviewRouter get access to the tourId parameter, we use { mergeParams: true } in the reviewRouter 
 
 router
   .route('/top-5-cheap')
