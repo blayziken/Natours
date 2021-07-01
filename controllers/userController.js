@@ -1,6 +1,8 @@
 const User = require('./../models/userModel');
 const catchAsyncError = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./handlerfactory');
+
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -37,24 +39,16 @@ exports.getUser = (req, res) => {
     message: 'This route is not yet defined!'
   });
 };
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!'
-  });
-};
+
+// CREATE USER
+exports.createUser = factory.createOne(User);
+
+// UPDATE USER
+exports.updateUser = factory.updateOne(User);
+
+// DELETE USER
+exports.deleteUser = factory.deleteOne(User);
+
 
 exports.updateMe = catchAsyncError(async (req, res, next) => {
   // 1) Create error if user POSTs password data
