@@ -81,6 +81,8 @@ exports.getAll = Model => catchAsyncError(async (req, res, next) => {
         .limitFields()
         .paginate();
 
+    // const document = await features.query.explain();
+
     const document = await features.query;
 
     // SEND RESPONSE
