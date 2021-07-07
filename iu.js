@@ -25,12 +25,14 @@
 // double classAverage = 70;
 // double minimumScoreToPass = classAverage - 5;
 
-if (percentage >= 60) {
-    print('Student Passed');
-} else if (percentage < 60) {
-    print('Student Failed');
-} else if (score <= minimumScoreToPass) {
-    print('Student Failed');
-} else if (score > minimumScoreToPass) {
-    print('Student Passed');
-}
+// if (percentage >= 60) {
+//     print('Student Passed');
+// } else if (percentage < 60) {
+//     print('Student Failed');
+// } else if (score <= minimumScoreToPass) {
+//     print('Student Failed');
+// } else if (score > minimumScoreToPass) {
+//     print('Student Passed');
+// }
+
+

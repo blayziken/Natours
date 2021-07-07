@@ -39,7 +39,6 @@
 
 const login = async (email, password) => {
   console.log(email, password);
-  console.log('here');
 
   try {
     const res = await axios({
@@ -51,8 +50,9 @@ const login = async (email, password) => {
       }
     });
     console.log(res);
-  } catch (err) {
-    console.log('here 2');
+  }
+
+  catch (err) {
     // console.log(err.response.data);
     console.log(err);
 
