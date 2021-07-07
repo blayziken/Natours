@@ -44,6 +44,10 @@ const login = async (email, password) => {
     const res = await axios({
       method: 'POST',
       url: 'http://127.0.0.1:8000/api/v1/users/login',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+      },
       data: {
         email,
         password
@@ -53,8 +57,8 @@ const login = async (email, password) => {
   }
 
   catch (err) {
-    // console.log(err.response.data);
-    console.log(err);
+    console.log(err.response.data);
+    // console.log(err);
 
   }
 }

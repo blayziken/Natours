@@ -79,8 +79,8 @@ exports.login = async (req, res, next) => {
     //Since the password is hidden with select:false, to get the password from the findOne, we use the select() to select a field from the DB
 
     console.log(user);
-    if (!user) {
-        // || !await user.correctPassword(password, user.password)
+    if (!user || !await user.correctPassword(password, user.password)) {
+        // 
         // if (!user || checkIfPasswordIsCorrect == false)
         return next(new AppError('Incorrect email or password', 401));
     }
