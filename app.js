@@ -17,10 +17,23 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     'Content-Security-Policy-Report-Only',
+//     "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js; frame-src 'self'"
+//   );
+//   next();
+// });
+
+
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Report-To',
+    '{"group":"csp-endpoint","max_age":10886400,"endpoints":[{"url":"http://your_server_ip:5500/__cspreport__"}],"include_subdomains":true}'
+  );
   res.setHeader(
     'Content-Security-Policy',
-    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
+    "default-src 'self'; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'sha256-INJfZVfoUd61ITRFLf63g+S/NJAfswGDl15oK0iXgYM='; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css; frame-src 'self' https://www.youtube.com https://youtube.com; report-to csp-endpoint; report-uri /__cspreport__;"
   );
   next();
 });
