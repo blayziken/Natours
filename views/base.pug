@@ -4,13 +4,6 @@ html
     block head
       meta(charset='UTF-8')
       meta(name='viewport' content='width=device-width, initial-scale=1.0')
-      //- meta(http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src-elem * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;")
-      //- meta(http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ")
-      //- meta(http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'sha256-somesha';")
-      //- meta(http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'")
-      //- meta(http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval'; object-src 'self'")
-      //- meta(http-equiv="Content-Security-Policy" content="default-src *  data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval' 'unsafe-dynamic'; script-src * data: blob: 'unsafe-inline' 'unsafe-eval'; connect-src * data: blob: 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src * data: blob: ; style-src * data: blob: 'unsafe-inline'; font-src * data: blob: 'unsafe-inline';")
-      //- meta(http-equiv="content_security_policy": "script-src 'self' 'unsafe-eval' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'unsafe-inline'; object-src 'self'")
       link(rel='stylesheet' href='/css/style.css')
       link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
       link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
@@ -27,7 +20,7 @@ html
     // FOOTER 
     include _footer
     
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js')
-    script(src='/js/mapbox.js')
-    script(src='/js/login.js')
-    //- script(src='/js/bundle.js')
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js')
+    //- script(src='/js/mapbox.js')
+    //- script(src='/js/login.js')
+    script(src='/js/bundle.js')

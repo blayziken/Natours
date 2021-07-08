@@ -73,12 +73,10 @@ exports.login = async (req, res, next) => {
     // 2) Check if user exists && password is correct
 
     //(a) Check if user exists
-    console.log('here');
     const user = await User.findOne({ email: email }).select('+password');
     //We can write this line with ES6 as User.findOne({email})
     //Since the password is hidden with select:false, to get the password from the findOne, we use the select() to select a field from the DB
 
-    console.log(user);
     if (!user || !await user.correctPassword(password, user.password)) {
         // 
         // if (!user || checkIfPasswordIsCorrect == false)
@@ -277,7 +275,7 @@ exports.isLoggedIn = async (req, res, next) => {
             }
 
             // THERE IS A LOGGED IN USER
-            res.locals.user = currentUser;
+            res.locals.user = currentUser;   // Using res.locals, our pug templates gets access to it
             return next();
         } catch (err) {
             return next();

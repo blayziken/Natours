@@ -52,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 
 app.use(
+  // For Axios CSP Error, set the headers with this:
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'", 'data:', 'blob:'],
@@ -70,6 +71,7 @@ app.use(
     },
   })
 );
+
 // Development logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -102,6 +104,7 @@ app.use(hpp({
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies);
   next();
 });
 
