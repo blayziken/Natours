@@ -1,28 +1,28 @@
 /* eslint-disable */
-import axios from 'axios';
-import { showAlert } from './alerts';
+// import axios from 'axios';
+// import { showAlert } from './alerts';
 
-export const login = async (email, password) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://127.0.0.1:8000/api/v1/users/login',
-      data: {
-        email,
-        password
-      }
-    });
+// export const login = async (email, password) => {
+//   try {
+//     const res = await axios({
+//       method: 'POST',
+//       url: 'http://127.0.0.1:8000/api/v1/users/login',
+//       data: {
+//         email,
+//         password
+//       }
+//     });
 
-    if (res.data.status === 'success') {
-      showAlert('success', 'Logged in successfully!');
-      window.setTimeout(() => {
-        location.assign('/');
-      }, 1500);
-    }
-  } catch (err) {
-    showAlert('error', err.response.data.message);
-  }
-};
+//     if (res.data.status === 'success') {
+//       showAlert('success', 'Logged in successfully!');
+//       window.setTimeout(() => {
+//         location.assign('/');
+//       }, 1500);
+//     }
+//   } catch (err) {
+//     showAlert('error', err.response.data.message);
+//   }
+// };
 
 // export const logout = async () => {
 //   try {
@@ -37,45 +37,63 @@ export const login = async (email, password) => {
 //   }
 // };
 
-// const login = async (email, password) => {
-//   console.log(email, password);
+const login = async (email, password) => {
+  console.log(email, password);
 
-//   try {
-//     const res = await axios({
-//       method: 'POST',
-//       url: 'http://127.0.0.1:8000/api/v1/users/login',
-//       headers: {
-//         'Content-Type': 'application/json;charset=UTF-8',
-//         "Access-Control-Allow-Origin": "*",
-//       },
-//       data: {
-//         email,
-//         password
-//       }
-//     });
+  try {
+    const res = await axios({
+      method: 'POST',
+      url: 'http://127.0.0.1:8000/api/v1/users/login',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+      },
+      data: {
+        email,
+        password
+      }
+    });
 
-//     if (res.data.status === 'success') {
-//       alert('Logged in successfully');
-//       window.setTimeout(() => {
-//         location.assign('/')
-//       }, 1500);
-//     }
+    if (res.data.status === 'success') {
+      showAlert('success', 'Logged in successfully!');
+      window.setTimeout(() => {
+        location.assign('/')
+      }, 1500);
+    }
 
-//     console.log(res);
-//   }
+    console.log(res);
+  }
 
-//   catch (err) {
-//     alert(err.response.data.message);
-//     console.log(err.response.data);
+  catch (err) {
+    showAlert('error', 'Error logging out! Try again.');
+    console.log(err.response.data);
 
-//     // console.log(err);
+    // console.log(err);
 
-//   }
-// }
+  }
+}
 
-// document.querySelector('.form').addEventListener('submit', e => {
-//   e.preventDefault();
-//   const email = document.getElementById('email').value;
-//   const password = document.getElementById('password').value;
-//   login(email, password);
-// });
+document.querySelector('.form').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  login(email, password);
+});
+
+
+
+
+// Design Frontend Logic for 'Alert'
+
+const hideAlert = () => {
+  const el = document.querySelector('.alert');
+  if (el) el.parentElement.removeChild(el);
+};
+
+// type is 'success' or 'error'
+const showAlert = (type, msg) => {
+  hideAlert();
+  const markup = `<div class="alert alert--${type}">${msg}</div>`;
+  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+  window.setTimeout(hideAlert, 5000);
+};
