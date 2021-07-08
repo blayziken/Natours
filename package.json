@@ -13,6 +13,7 @@
   "author": "Toluwalope Jesufemi",
   "license": "ISC",
   "dependencies": {
+    "@babel/code-frame": "^7.14.5",
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
@@ -32,6 +33,7 @@
     "nodemailer": "^6.6.2",
     "nodemon": "^2.0.7",
     "pug": "^3.0.2",
+    "signal-exit": "^3.0.3",
     "slugify": "^1.5.3",
     "validator": "^10.11.0",
     "xss-clean": "^0.1.1"
@@ -45,7 +47,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
-    "parcel-bundler": "^1.12.5",
+    "parcel-bundler": "^1.12.3",
     "prettier": "^1.19.1"
   },
   "engines": {

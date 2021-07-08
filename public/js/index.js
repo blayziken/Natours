@@ -25,7 +25,7 @@ if (loginForm)
     login(email, password);
   });
 
-if (logOutBtn) logOutBtn.addEventListener('click', logout);
+// if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
 // if (userDataForm)
 //   userDataForm.addEventListener('submit', e => {
