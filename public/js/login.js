@@ -2,6 +2,16 @@
 // import axios from 'axios';
 // import { showAlert } from './alerts';
 
+
+// document.querySelector('.nav__el--cta').addEventListener("click", e => {
+//   e.preventDefault();
+//   console.log('Here!!!!!!!!!')
+// });
+
+
+
+
+
 // Design Frontend Logic for 'Alert'
 const hideAlert = () => {
   const el = document.querySelector('.alert');
@@ -51,6 +61,15 @@ const login = async (email, password) => {
   }
 }
 
+// ONCLICK SUBMIT ON LOGIN FORM
+document.querySelector('.form').addEventListener('submit', e => {
+  console.log('form form');
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  login(email, password);
+});
+
 // LOGOUT IMPLEMENTATION
 const logout = async () => {
   console.log('-111111111111111111111111111111111111')
@@ -72,13 +91,11 @@ const logout = async () => {
   }
 };
 
-// ONCLICK SUBMIT ON LOGIN FORM
-document.querySelector('.form').addEventListener('submit', e => {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  login(email, password);
+document.querySelector('.nav__el--logout').addEventListener('click', () => {
+  console.log('BBBBBBBBBBBBBBBB');
+  logout();
 });
+
 
 
 // document.querySelector('.nav__el--logout').addEventListener('click', () => {
@@ -126,10 +143,7 @@ document.querySelector('.form').addEventListener('submit', e => {
 // const logOutBtn = document.querySelector('.nav__el--logout');
 
 // if (logOutBtn) logOutBtn.addEventListener('click', logout);
-// document.querySelector('.nav__el--logout').addEventListener('click', () => {
-//   console.log('BBBBBBBBBBBBBBBB');
 
-// });
 
 // document.querySelector('.nav__user-img').addEventListener('click', () => {
 //   console.log('AAAAAAAAAAAAAAAA');
@@ -153,10 +167,7 @@ document.querySelector('.form').addEventListener('submit', e => {
 // document.addEventListener('DOMContentLoaded', function () {
 // document.querySelector('.nav__el--logout').addEventListener("click", logout);
 
-document.querySelector('.nav__el--cta').addEventListener("click", e => {
-  e.preventDefault();
-  console.log('Here!!!!!!!!!')
-});
+
 
 document.querySelector('.nav__el').addEventListener('click', function () {
   console.log('DDDDDDDDDDDDDD');
