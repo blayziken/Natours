@@ -21,6 +21,7 @@ var loginSubmitButton = document.querySelector('.form--login');
 var logOutClick = document.querySelector('.nav__el--logout');
 // SUBMIT BUTTON ON UPDATE ACCOUNT SETTINGS FORM
 var userUpdateDataForm = document.querySelector('.form-user-data');
+var userPasswordUpdateForm = document.querySelector('.form-user-password');
 
 
 // EVENT LISTENERS: ONCLICK SUBMIT ON LOGIN FORM
@@ -29,6 +30,7 @@ if (loginSubmitButton) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+
         login(email, password);
     });
 }
@@ -44,9 +46,30 @@ if (logOutClick) {
 if (userUpdateDataForm) {
     userUpdateDataForm.addEventListener('submit', e => {
         e.preventDefault();
-        console.log('Hereeeeeeeeeeeee');
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
-        updateSettings(name, email);
+
+        updateData(name, email);
+    });
+}
+
+// EVENT LISTENERS: UPDATE PASSWORD FORM
+if (userPasswordUpdateForm) {
+    userPasswordUpdateForm.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        document.querySelector('.btn--save-password').textContent = 'Updating...';
+
+        const passwordCurrent = document.getElementById('password-current').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('password-confirm').value;
+
+        await updatePassword(passwordCurrent, password, passwordConfirm);
+
+        document.querySelector('.btn--save-password').textContent = 'SAVE PASSWORD';
+
+        document.getElementById('password-current').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('password-confirm').value = '';
     });
 }
