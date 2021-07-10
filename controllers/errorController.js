@@ -27,6 +27,7 @@ const handleJWTExpiredError = () =>
     new AppError('Your token has expired! Please log in again.', 401);
 
 const sendErrorDev = (err, req, res) => {
+    console.log('assd');
     // A) API
     if (req.originalUrl.startsWith('/api')) {
         return res.status(err.statusCode).json({
@@ -43,6 +44,7 @@ const sendErrorDev = (err, req, res) => {
         title: 'Something went wrong!',
         msg: err.message
     });
+
 };
 
 const sendErrorProd = (err, req, res) => {
@@ -91,9 +93,10 @@ module.exports = (err, req, res, next) => {
     err.status = err.status || 'error';
 
     if (process.env.NODE_ENV === 'development') {
-        sendErrorDev(err, res);
+        sendErrorDev(err, req, res);
     } else if (process.env.NODE_ENV === 'production') {
         let error = { ...err };
+        error.message = err.message;
 
         if (error.name === 'CastError') error = handleCastErrorDB(error);
         if (error.code === 11000) error = handleDuplicateFieldsDB(error);
