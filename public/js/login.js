@@ -64,9 +64,16 @@ const logout = async () => {
       url: 'http://127.0.0.1:8000/api/v1/users/logout'
     });
 
-    if ((res.data.status = 'success')) location.reload(true);
+    // if ((res.data.status = 'success')) location.reload(true);
 
-  } catch (err) {
+    if (res.data.status = 'success') {
+      window.setTimeout(() => {
+        location.assign('/') //Redirect back to Home Screen after logging out
+      }, 1000);
+    }
+  }
+
+  catch (err) {
     console.log(err.response);
     showAlert('error', 'Error logging out! Try again.');
   }
