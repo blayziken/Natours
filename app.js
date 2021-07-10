@@ -88,8 +88,8 @@ app.use('/api', limiter);
 
 // Body Parser, reading data from the body into req.body
 app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // middleware to parse cookie (*console.log(req.cookie))
+app.use(express.urlencoded({ extended: true })); // middleware used to parse data coming from a FORM
 
 // Data sanitiation against NoSQL query injection
 app.use(mongoSanitize());

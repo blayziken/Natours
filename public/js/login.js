@@ -3,7 +3,7 @@
 // import { showAlert } from './alerts';
 
 
-var loginSubmitButton = document.querySelector('.form');
+var loginSubmitButton = document.querySelector('.form--login');
 var logOutClick = document.querySelector('.nav__el--logout');
 
 
