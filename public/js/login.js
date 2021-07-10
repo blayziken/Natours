@@ -27,7 +27,7 @@ const login = async (email, password) => {
     // console.log(res);
   }
   catch (err) {
-    showAlert('error', 'Error logging out! Try again.');
+    showAlert('error', 'Error logging in! Try again.');
     console.log(err.response.data);
     // console.log(err);
   }
