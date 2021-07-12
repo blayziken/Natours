@@ -34,6 +34,7 @@
     "nodemailer": "^6.6.2",
     "nodemon": "^2.0.7",
     "pug": "^3.0.2",
+    "sharp": "^0.28.3",
     "signal-exit": "^3.0.3",
     "slugify": "^1.5.3",
     "validator": "^10.11.0",
