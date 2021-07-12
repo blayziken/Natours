@@ -23,14 +23,15 @@
 //   }
 // };
 
-const updateData = async (name, email) => {
+const updateData = async (name, email, photo) => {
   try {
     const res = await axios({
       method: 'PATCH',
       url: 'http://127.0.0.1:8000/api/v1/users/updateMe',
       data: {
         name,
-        email
+        email,
+        photo
       }
     });
 

@@ -46,10 +46,22 @@ if (logOutClick) {
 if (userUpdateDataForm) {
     userUpdateDataForm.addEventListener('submit', e => {
         e.preventDefault();
+
+        // const form = new FormData();
+        // form.append('name', document.getElementById('name').value);
+        // form.append('email', document.getElementById('email').value);
+        // form.append('photo', document.getElementById('photo').files[0]);
+
+        // console.log(form);
+        // updateData(form);
+
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
-
-        updateData(name, email);
+        const photo = document.getElementById('photo').files[0];
+        const photoName = photo.name
+        console.log(photo);
+        console.log(photo.name);
+        updateData(name, email, photoName);
     });
 }
 
