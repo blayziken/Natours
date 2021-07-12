@@ -47,21 +47,23 @@ if (userUpdateDataForm) {
     userUpdateDataForm.addEventListener('submit', e => {
         e.preventDefault();
 
-        // const form = new FormData();
-        // form.append('name', document.getElementById('name').value);
-        // form.append('email', document.getElementById('email').value);
-        // form.append('photo', document.getElementById('photo').files[0]);
+        const form = new FormData();
+        form.append('name', document.getElementById('name').value);
+        form.append('email', document.getElementById('email').value);
+        form.append('photo', document.getElementById('photo').files[0]);
+        console.log(form);
 
-        // console.log(form);
-        // updateData(form);
+        updateData(form);
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const photo = document.getElementById('photo').files[0];
-        const photoName = photo.name
-        console.log(photo);
-        console.log(photo.name);
-        updateData(name, email, photoName);
+        // FOR SOME REASON, THE PHOTO UPLOAD ONLY WORKS WITH FORMDATA()
+
+        // const name = document.getElementById('name').value;
+        // const email = document.getElementById('email').value;
+        // const photo = document.getElementById('photo').files[0];
+        // // const photoName = photo.name
+        // console.log(photo);
+        // // console.log(photo.name);
+        // updateData(name, email, photo);
     });
 }
 

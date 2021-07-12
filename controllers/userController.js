@@ -41,6 +41,10 @@ exports.uploadUserPhoto = upload.single('photo');
 
 // RESIZE USER PHOTO MIDDLEWARE
 exports.resizeUserPhoto = catchAsyncError(async (req, res, next) => {
+  console.log('-------------Resize User Photo-------------');
+  console.log(req.file);
+  console.log('--------------------------');
+
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
@@ -85,6 +89,11 @@ exports.deleteUser = factory.deleteOne(User);
 
 exports.updateMe = catchAsyncError(async (req, res, next) => {
   // console.log(req.file);
+  console.log('#####################');
+
+  console.log(req.body.photo);
+  console.log('#####################');
+
 
   // 1) Create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
