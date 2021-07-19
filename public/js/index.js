@@ -23,6 +23,9 @@ var logOutClick = document.querySelector('.nav__el--logout');
 var userUpdateDataForm = document.querySelector('.form-user-data');
 var userPasswordUpdateForm = document.querySelector('.form-user-password');
 
+// FOR STRIPE
+const bookButton = document.getElementById('book-tour');
+
 
 // EVENT LISTENERS: ONCLICK SUBMIT ON LOGIN FORM
 if (loginSubmitButton) {
@@ -86,4 +89,18 @@ if (userPasswordUpdateForm) {
         document.getElementById('password').value = '';
         document.getElementById('password-confirm').value = '';
     });
+}
+
+if (bookButton) {
+    bookButton.addEventListener('click', e => {
+
+        e.target.textContent = 'Processing...';
+
+        const tourId = e.target.dataset.tourId; // to get the tour id from the button in the html page
+        // Using destructuring:
+        // const { tourId } = e.target.dataset;
+
+        bookTour(tourId);
+
+    })
 }
