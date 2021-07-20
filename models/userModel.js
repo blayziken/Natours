@@ -81,7 +81,7 @@ userSchema.pre(/^find/, function (next) {
 userSchema.methods.correctPassword = async function (inputPasswood, userPassword) {
     //inputPasswood is not hashed,
     //userPassword is hashed
-    console.log(await bcrypt.compare(inputPasswood, userPassword));
+    // console.log(await bcrypt.compare(inputPasswood, userPassword));
     return await bcrypt.compare(inputPasswood, userPassword);
 };
 
@@ -111,7 +111,7 @@ userSchema.methods.createPasswordResetToken = function () {
         .update(resetToken)
         .digest('hex');
 
-    console.log({ resetToken }, this.passwordResetToken);
+    // console.log({ resetToken }, this.passwordResetToken);
 
     // Expires after 10 minutes
     this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 * 60 (for seconds) * 1000 (for milliseconds)

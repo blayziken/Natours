@@ -2,7 +2,7 @@
 
 // LOGIN IMPLEMENTATION
 const login = async (email, password) => {
-  console.log(email, password);
+  // console.log(email, password);
 
   try {
     const res = await axios({
@@ -25,11 +25,9 @@ const login = async (email, password) => {
         location.assign('/')
       }, 1500);
     }
-    console.log(res);
+    // console.log(res);
   }
   catch (err) {
-    console.log('aaa');
-    console.log(err);
     showAlert('error', 'Error logging in! Try again.');
     console.log(err.response.data);
     // console.log(err);
@@ -60,7 +58,7 @@ const logout = async () => {
 
 // SIGN UP IMPLEMENTATION
 const signup = async (name, email, password, passwordConfirm) => {
-  console.log(name, email, password, passwordConfirm);
+  // console.log(name, email, password, passwordConfirm);
 
   try {
     const res = await axios({

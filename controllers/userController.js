@@ -42,8 +42,6 @@ exports.uploadUserPhoto = upload.single('photo');
 // RESIZE USER PHOTO MIDDLEWARE
 exports.resizeUserPhoto = catchAsyncError(async (req, res, next) => {
   // console.log('-------------Resize User Photo-------------');
-  // console.log(req.file);
-  // console.log('--------------------------');
 
   if (!req.file) return next();
 
