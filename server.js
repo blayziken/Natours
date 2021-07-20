@@ -17,6 +17,8 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
+// const DB = 'mongodb://localhost:27017/natours'; // local DB connection
+
 // ATLAS DB CONNECTION
 mongoose
   .connect(DB, {
@@ -30,7 +32,7 @@ mongoose
 
 // LOCAL DB CONNECTION
 // mongoose
-//   .connect(process.env.DATABASE_LOCAL, {
+//   .connect(DB, {
 //     useNewUrlParser: true,
 //     useCreateIndex: true,
 //     useFindAndModify: false,
