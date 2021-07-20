@@ -17,15 +17,19 @@ const showAlert = (type, msg) => {
 
 // SUBMIT BUTTON ON LOGIN FORM
 var loginSubmitButton = document.querySelector('.form--login');
+
 // LOG OUT CLICK
 var logOutClick = document.querySelector('.nav__el--logout');
+
+// SUBMIT BUTTON ON SIGNUP FORM
+var signupSubmitButton = document.querySelector('.form--signup');
+
 // SUBMIT BUTTON ON UPDATE ACCOUNT SETTINGS FORM
 var userUpdateDataForm = document.querySelector('.form-user-data');
 var userPasswordUpdateForm = document.querySelector('.form-user-password');
 
 // FOR STRIPE
 const bookButton = document.getElementById('book-tour');
-
 
 // EVENT LISTENERS: ONCLICK SUBMIT ON LOGIN FORM
 if (loginSubmitButton) {
@@ -42,6 +46,19 @@ if (loginSubmitButton) {
 if (logOutClick) {
     logOutClick.addEventListener('click', () => {
         logout();
+    });
+}
+
+// EVENT LISTENERS: ONCLICK SUBMIT ON SIGNUP FORM
+if (signupSubmitButton) {
+    signupSubmitButton.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordConfirm').value;
+
+        signup(name, email, password, passwordConfirm);
     });
 }
 
