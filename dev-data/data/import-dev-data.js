@@ -7,7 +7,9 @@ const Review = require('./../../models/reviewModel');
 
 dotenv.config({ path: './config.env' });
 
-const DB = 'mongodb://localhost:27017/natours';
+// const DB = 'mongodb://localhost:27017/natours'; local DB connection
+
+const DB = 'mongodb+srv://tolu:QTVpUJXytOgOJK3E@cluster0.wcdzv.mongodb.net/natours'; // Atlas DB connection
 
 mongoose
   .connect(DB, {
