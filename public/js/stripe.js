@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const stripe = Stripe('pk_test_BUkd0ZXAj6m0q0jMyRgBxNns00PPtgvjjr');
+// const stripe = Stripe('pk_test_BUkd0ZXAj6m0q0jMyRgBxNns00PPtgvjjr');
 // REPLACE WITH MY PUBLIC KEY FROM MY STRIPE ACCOUNT
 
 const bookTour = async tourId => {
